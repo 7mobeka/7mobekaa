@@ -1,0 +1,26 @@
+<!-- all_users.html -->
+{% extends 'overall/base.html' %}
+
+{% block content %}
+  <h2>All Users</h2>
+  <ul>
+    {% for user in users %}
+      <li>
+        <strong>Username:</strong> {{ user.username }}<br>
+        <strong>Email:</strong> {{ user.email }}<br>
+        
+        {% if user.userprofile.image %}
+          <img src="{{ user.userprofile.image.url }}" alt="{{ user.username }}" width="200" height="150"><br>
+        {% endif %}
+        
+        {% if user.userprofile.description %}
+          <strong>Description:</strong> {{ user.userprofile.description }}<br>
+        {% endif %}
+        
+        <strong>Age:</strong> {{ user.userprofile.age }}<br>
+        <strong>Address:</strong> {{ user.userprofile.address }}<br>
+        <strong>Phone number:</strong> {{ user.userprofile.phone_number }}<br>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

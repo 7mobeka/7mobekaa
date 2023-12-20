@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Display Applications</title>
+</head>
+<body>
+
+  <h1>Display Applications</h1>
+
+  {% for application in display_application %}
+    <div>
+      <p><strong>User Name:</strong> {{ application.user_name }}</p>
+      <p><strong>User Email:</strong> {{ application.user_email }}</p>
+      <p><strong>Event:</strong> {{ application.event.name }}</p>
+      <hr>
+    </div>
+  {% endfor %}
+
+</body>
+</html>
