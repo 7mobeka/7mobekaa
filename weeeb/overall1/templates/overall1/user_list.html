@@ -1,0 +1,38 @@
+{% extends 'overall1/base.html' %}
+
+{% block content %}
+  <style>
+    /* Add this CSS directly in your HTML file */
+    .user-image {
+      max-width: 100%;
+      height: auto;
+      border-radius: 5px; /* Optional: Add border-radius for a rounded appearance */
+    }
+  </style>
+
+  <h2>Volunteer User List</h2>
+  <ul class="user-list">
+    {% for user_profile in users %}
+      <li>
+        <div class="user-box">
+          <h3>{{ user_profile.user.username }}</h3>
+
+          <div class="user-details">
+            {% if user_profile.image %}
+              <img src="{{ user_profile.image.url }}" alt="{{ user_profile.user.username }} Image" class="user-image">
+            {% else %}
+              <p>No image available</p>
+            {% endif %}
+            
+            <p><strong>Email:</strong> {{ user_profile.user.email }}</p>
+            <p><strong>Type:</strong> {{ user_profile.get_type_display }}</p>
+            <p><strong>Phone Number:</strong> {{ user_profile.phone_number }}</p>
+            <p><strong>Bio:</strong> {{ user_profile.bio }}</p>
+            
+            <a href="{% url 'send_message_with_recipient' recipient=user_profile.user.username %}" class="send-message-btn">Send Message</a>
+          </div>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

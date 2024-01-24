@@ -1,0 +1,43 @@
+{% extends 'overall1/base.html' %}
+
+{% block title %}User Messages{% endblock %}
+
+{% block content %}
+    <div style="margin: 20px;">
+        <h1>User Messages</h1>
+
+        <!-- Sent Messages -->
+        <h2>Sent Messages</h2>
+        {% if sent_messages %}
+            <ul style="list-style: none; padding: 0;">
+                {% for message in sent_messages %}
+                    <li style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px;">
+                        <strong style="color: #007BFF;">To:</strong> {{ message.recipient.username }}<br>
+                        <strong style="color: #007BFF;">Subject:</strong> {{ message.subject }}<br>
+                        <strong style="color: #007BFF;">Body:</strong> {{ message.body }}<br>
+                        <strong style="color: #007BFF;">Sent at:</strong> {{ message.sent_at|date:"F j, Y H:i:s" }}<br>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No sent messages.</p>
+        {% endif %}
+
+        <!-- Received Messages -->
+        <h2>Received Messages</h2>
+        {% if received_messages %}
+            <ul style="list-style: none; padding: 0;">
+                {% for message in received_messages %}
+                    <li style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px;">
+                        <strong style="color: #007BFF;">From:</strong> {{ message.sender.username }}<br>
+                        <strong style="color: #007BFF;">Subject:</strong> {{ message.subject }}<br>
+                        <strong style="color: #007BFF;">Body:</strong> {{ message.body }}<br>
+                        <strong style="color: #007BFF;">Sent at:</strong> {{ message.sent_at|date:"F j, Y H:i:s" }}<br>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No received messages.</p>
+        {% endif %}
+    </div>
+{% endblock %}

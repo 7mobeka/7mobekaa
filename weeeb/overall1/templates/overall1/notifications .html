@@ -1,0 +1,5 @@
+{% for notification in user.notifications.all %}
+    {% if not notification.is_read %}
+        <p>{{ notification.message }}</p>
+    {% endif %}
+{% endfor %}
