@@ -1,0 +1,25 @@
+{% extends 'overall1/base.html' %}
+<!-- view_profile.html -->
+
+{% block title %}View Profile{% endblock %}
+
+{% block content %}
+    <div style="margin: 20px;">
+        <h1>Your Profile</h1>
+        <p><strong>Bio:</strong> {{ user_profile.bio }}</p>
+        <p><strong>First Name:</strong> {{ user_profile.first_name }}</p>
+        <p><strong>Last Name:</strong> {{ user_profile.last_name }}</p>
+        <p><strong>Email:</strong> {{ user_profile.email }}</p>
+        <p><strong>Type:</strong> {{ user_profile.get_type_display }}</p>
+        <p><strong>Phone Number:</strong> {{ user_profile.phone_number }}</p>
+        
+        {% if user_profile.image %}
+            <p><strong>Image:</strong> <img src="{{ user_profile.image.url }}" alt="User Image" width="100"></p>
+        {% else %}
+            <p><strong>Image:</strong> No image available</p>
+        {% endif %}
+
+        <!-- Edit Profile link -->
+        <a href="{% url 'edit_profile' %}" style="color: #4CAF50; text-decoration: none;">Edit Profile</a>
+    </div>
+{% endblock %}

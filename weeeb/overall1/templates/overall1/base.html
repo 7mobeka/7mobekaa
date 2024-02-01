@@ -1,0 +1,84 @@
+<!-- base.html in the overall1/templates/overall1/ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}MyApp{% endblock %}</title>
+    <style>
+        /* Add your CSS styles for navigation and footer here */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'view_profile' %}">View Profile</a></li>
+                <li><a href="{% url 'logout_user' %}">Logout</a></li>
+                <li><a href="{% url 'user_messages' %}">User Messages</a></li>
+                <li><a href="{% url 'user_list' %}">User List</a></li>
+                
+                <li><a href="{% url 'view_appointment' %}">View Appointment</a></li>
+                <li><a href="{% url 'edit_appointment' %}">Edit Appointment</a></li>
+                
+               
+                
+                <li><a href="{% url 'event_list' %}">Event List</a></li>
+            {% else %}
+                <li><a href="{% url 'login_user' %}">Login</a></li>
+                <li><a href="{% url 'register_user' %}">Register</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    
+    <div>
+        {% block content %}{% endblock %}
+    </div>
+
+    <!-- Notification Section -->
+    <div>
+        {% if user.is_authenticated %}
+            {% for notification in user.notifications.all %}
+                {% if not notification.is_read %}
+                    <p>{{ notification.message }}</p>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Your App Name. All rights reserved.</p>
+    </footer>
+</body>
+</html>
